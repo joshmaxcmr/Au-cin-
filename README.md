@@ -148,9 +148,7 @@ Le projet utilise un système de design personnalisé avec TailwindCSS :
 ## 🙏 Remerciements
 
 - **[JavaScript Mastery](https://www.youtube.com/@javascriptmastery)** pour le tutoriel original
-- **[TMDB](https://www.themoviedb.org/)** pour l'API cinématographique
-- **[Appwrite](https://appwrite.io/)** pour les services backend
-- **La communauté React** pour les outils et ressources
+
 
 ---
 
