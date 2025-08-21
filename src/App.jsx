@@ -4,7 +4,7 @@ import Spinner from "./components/Spinner.jsx";
 import './App.css'
 import MovieCard from "./components/MovieCard.jsx";
 import {useDebounce} from 'react-use'
-import {updateSearchCount} from "./appwrite.js";
+import {getTrendingMovies, updateSearchCount} from "./appwrite.js";
 
 const API_BASE_URL = 'https://api.themoviedb.org/3'
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY
@@ -21,6 +21,7 @@ const App = () => {
     const [searchTerm, setSearchTerm] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const [movieList, setMovieList] = useState([]);
+    const [trendingMovies, setTrendingMovies] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [debounceSearchterm, setDebounceSearchterm] = useState('')
 
@@ -29,7 +30,7 @@ const App = () => {
     const fetchMovies = async (query = '') => {
         setIsLoading(true);
         setErrorMessage('')
-
+        
         try {
             const endpoint = query 
                 ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
@@ -59,10 +60,26 @@ const App = () => {
             setIsLoading(false);
         }
     }
+    
+     const loadTendingMovies = async () => {
+        try {
+            const movies = await getTrendingMovies();
+            setTrendingMovies(movies);
+        } catch (error) {
+            console.log(`Erreur lors de la récupération des films en tendance: ${error}`);
+           
+        }
+            
+     }
 
     useEffect(() => {
         fetchMovies(searchTerm);
     }, [debounceSearchterm]);
+
+    useEffect(() => {
+        loadTendingMovies();
+    }, []);
+    
 
     return (
         <main>
@@ -74,8 +91,22 @@ const App = () => {
                 <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
             </header>
 
+            {trendingMovies.length > 0 && (
+                <section className="trending">
+                    <h2>Films en tendance</h2>
+
+                    <ul>
+                        {trendingMovies.map((movie, index) => (
+                           <li key={movie.$id}>
+                               <p>{index + 1}</p>
+                               <img src={movie.poster_url} alt="{movie.title}"/>
+                           </li>
+                        ))}
+                    </ul>
+                </section>
+            )}
             <section className="all-movies">
-                <h2 className="mt-20">Tout les films</h2>
+                <h2>Films récents</h2>
 
                 {isLoading ? (
                    <Spinner/>
