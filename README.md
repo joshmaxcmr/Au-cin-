@@ -7,6 +7,8 @@
 ![React](https://img.shields.io/badge/react-18.x-blue.svg)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-3.x-38bdf8.svg)
 
+**[<button style="color:red;cursor: pointer;">SITE LIVE</button>](https://au-cin.vercel.app/)**
+
 ---
 
 ## 🎯 À Propos
@@ -147,7 +149,7 @@ Le projet utilise un système de design personnalisé avec TailwindCSS :
 
 ## 🙏 Remerciements
 
-- **[JavaScript Mastery](https://www.youtube.com/@javascriptmastery)** pour le tutoriel original
+- **[JavaScript Mastery](https://www.youtube.com/@javascriptmastery)** Ressources
 
 
 ---

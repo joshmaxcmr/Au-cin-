@@ -5,6 +5,7 @@ import './App.css'
 import MovieCard from "./components/MovieCard.jsx";
 import {useDebounce} from 'react-use'
 import {getTrendingMovies, updateSearchCount} from "./appwrite.js";
+import { Analytics } from "@vercel/analytics/react"
 
 const API_BASE_URL = 'https://api.themoviedb.org/3'
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY
@@ -121,7 +122,7 @@ const App = () => {
                 )}
             </section>
 
-
+            <Analytics/>
         </main>
     )
 }
